@@ -38,8 +38,8 @@
    'C:\\Python\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_subprocess.py',
    'PYSOURCE'),
   ('reposync', 'C:\\test\\reposync.py', 'PYSOURCE'),
-  ('VCRUNTIME140.dll', 'C:\\Python\\VCRUNTIME140.dll', 'BINARY'),
   ('python310.dll', 'C:\\Python\\python310.dll', 'BINARY'),
+  ('VCRUNTIME140.dll', 'C:\\Python\\VCRUNTIME140.dll', 'BINARY'),
   ('_decimal', 'C:\\Python\\DLLs\\_decimal.pyd', 'EXTENSION'),
   ('_hashlib', 'C:\\Python\\DLLs\\_hashlib.pyd', 'EXTENSION'),
   ('unicodedata', 'C:\\Python\\DLLs\\unicodedata.pyd', 'EXTENSION'),
@@ -52,7 +52,7 @@
  [],
  False,
  False,
- 1655393743,
+ 1655410079,
  [('run.exe',
    'C:\\Python\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])

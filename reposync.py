@@ -2,13 +2,48 @@ import subprocess
 import os
 import sys
 
-def convertTuple(tup):
-	str = tup[0].decode('utf-8')
-	str=str.replace('\n',' ')
-	str=str.replace('\r',' ')
-	if ('Your branch is up to date' in str):
-		str = "Local branch is already in sync with upstream."
-	return str
+def cleanMessage(msg):
+	# ----------------------------------------------------------
+	# Convert to UTF8
+	# ----------------------------------------------------------
+	msg = msg.decode('utf-8')
+	# ----------------------------------------------------------
+	# Clean up confusing messages:
+	# ----------------------------------------------------------
+	strout=msg.replace('\n',' ')
+	strout=strout.replace('\r','')
+	strout=strout.replace("On branch main Your branch", "On branch main. Your branch")
+	strout=strout.replace(".  nothing to commit", ". Nothing to commit")
+	strout=strout.replace("working tree clean ", "working tree clean.")
+	npos = strout.find("Your branch is up to date")
+	if (npos > 7):
+		strout=strout[0:npos]
+
+	strout=strout.strip()
+	if (strout=="On branch main."):
+		strout = ""
+
+	return strout
+
+# def convertTuple(tup):
+# 	# ----------------------------------------------------------
+# 	# Parse message from index 0 of tuple. 
+# 	# ----------------------------------------------------------
+# 	#strout = tup[0].decode('utf-8')
+# 	strout = tup[0].decode('utf-8')
+# 	# ----------------------------------------------------------
+# 	# Clean up known anomalies.
+# 	# ----------------------------------------------------------
+# 	npos = strout.find("Your branch is up to date")
+# 	if (npos > 0):
+# 		strout=strout[0:npos]
+
+# 	strout=strout.replace('\n',' ')
+# 	strout=strout.replace('\r','')
+# 	# strout=strout.replace("On branch main Your branch", "On branch main. Your branch")
+# 	# strout=strout.replace(".  nothing to commit", ". Nothing to commit")
+# 	# strout=strout.replace("working tree clean ", "working tree clean.")
+# 	return strout
 
 # --------------------------------------------------------------
 # Configure repo, target branch and executable paths 
@@ -26,7 +61,7 @@ logdrive = logdir[0:2]
 subprocess.call([logpath, "----------------------------------------------"])
 subprocess.call([logpath, "[log:] Reposync session start."])
 subprocess.call([logpath, "----------------------------------------------"])
-msg="[inf:] RepoPath: " + repopath + ". Target branch: " + branch + "."
+msg="[inf:] RepoPath: " + repopath + ". Target branch: " + branch
 subprocess.call([logpath, msg])
 
 # --------------------------------------------------------------
@@ -36,41 +71,48 @@ subprocess.call([logpath, msg])
 if (os.path.isdir(repopath)):
 	os.chdir(repodrive)
 	os.chdir(repopath)
-	p=subprocess.Popen(["git", "add", "."], stdout=subprocess.PIPE)
-	tup=p.communicate()
-	msg=convertTuple(tup)
-	os.chdir(logdrive)
-	os.chdir(logdir)
-	if (msg):
-		subprocess.call([logpath, "[git:] " + msg])
+	with subprocess.Popen(["git", "add", "."], stdout=subprocess.PIPE) as proc:
+		msg=proc.stdout.read()
+		# ------------------------------------------------------
+		# The add output will usually be nothing. 
+		# We don't want to even call cleanMessage in that case.
+		# ------------------------------------------------------
+		if (msg):
+			msg=cleanMessage(msg)
+			if (msg):
+				os.chdir(logdrive)
+				os.chdir(logdir)
+				subprocess.call([logpath, "[git:] " + msg])
 	os.chdir(repodrive)
 	os.chdir(repopath)
-	p=subprocess.Popen(["git", "checkout " + branch], stdout=subprocess.PIPE)
-	tup=p.communicate()
-	msg=convertTuple(tup)
-	os.chdir(logdrive)
-	os.chdir(logdir)
-	if (msg):
-		subprocess.call([logpath, "[git:] " + msg])
+	with subprocess.Popen(["git", "checkout", branch], stdout=subprocess.PIPE) as proc:
+		msg=proc.stdout.read()
+		msg=cleanMessage(msg)
+		if (msg):
+			os.chdir(logdrive)
+			os.chdir(logdir)
+			subprocess.call([logpath, "[git:] " + msg])
 	os.chdir(repodrive)
 	os.chdir(repopath)
-	p=subprocess.Popen(["git", "commit", "-m", "Updated by RepoAutoSync."], stdout=subprocess.PIPE)
-	tup=p.communicate()
-	msg=convertTuple(tup)
-	os.chdir(logdrive)
-	os.chdir(logdir)
-	if (msg):
-		subprocess.call([logpath, "[git:] " + msg])
+	with subprocess.Popen(["git", "commit", "-m", "Updated by RepoSync."], stdout=subprocess.PIPE) as proc:
+		msg=proc.stdout.read()
+		msg=cleanMessage(msg)
+		if (msg):
+			os.chdir(logdrive)
+			os.chdir(logdir)
+			subprocess.call([logpath, "[git:] " + msg])
 	os.chdir(repodrive)
 	os.chdir(repopath)
-	p=subprocess.Popen(["git", "push"], stdout=subprocess.PIPE)
-	tup=p.communicate()
-	msg=convertTuple(tup)
-	os.chdir(logdrive)
-	os.chdir(logdir)
-	if (msg):
-		subprocess.call([logpath, "[git:] " + msg])
+	with subprocess.Popen(["git", "push"], stdout=subprocess.PIPE) as proc:
+		msg=proc.stdout.read()
+		msg=cleanMessage(msg)
+		if (msg):
+			os.chdir(logdrive)
+			os.chdir(logdir)
+			subprocess.call([logpath, "[git:] " + msg])
 
+os.chdir(logdrive)
+os.chdir(logdir)
 msg="[log:] Reposync session end."
 subprocess.call([logpath, msg])
 sys.exit(0)

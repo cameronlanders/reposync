@@ -38,8 +38,8 @@
    'C:\\Python\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_subprocess.py',
    'PYSOURCE'),
   ('log', 'C:\\test\\log.py', 'PYSOURCE'),
-  ('python310.dll', 'C:\\Python\\python310.dll', 'BINARY'),
   ('VCRUNTIME140.dll', 'C:\\Python\\VCRUNTIME140.dll', 'BINARY'),
+  ('python310.dll', 'C:\\Python\\python310.dll', 'BINARY'),
   ('select', 'C:\\Python\\DLLs\\select.pyd', 'EXTENSION'),
   ('_decimal', 'C:\\Python\\DLLs\\_decimal.pyd', 'EXTENSION'),
   ('_hashlib', 'C:\\Python\\DLLs\\_hashlib.pyd', 'EXTENSION'),
@@ -52,7 +52,7 @@
  [],
  False,
  False,
- 1654004595,
+ 1655399150,
  [('run.exe',
    'C:\\Python\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit\\run.exe',
    'EXECUTABLE')])

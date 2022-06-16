@@ -121,6 +121,6 @@
   ('gettext', 'C:\\Python\\lib\\gettext.py', 'PYMODULE'),
   ('os', 'C:\\Python\\lib\\os.py', 'PYMODULE'),
   ('tracemalloc', 'C:\\Python\\lib\\tracemalloc.py', 'PYMODULE'),
-  ('_py_abc', 'C:\\Python\\lib\\_py_abc.py', 'PYMODULE'),
   ('stringprep', 'C:\\Python\\lib\\stringprep.py', 'PYMODULE'),
+  ('_py_abc', 'C:\\Python\\lib\\_py_abc.py', 'PYMODULE'),
   ('datetime', 'C:\\Python\\lib\\datetime.py', 'PYMODULE')])

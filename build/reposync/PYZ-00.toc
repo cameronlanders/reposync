@@ -118,9 +118,9 @@
   ('dis', 'C:\\Python\\lib\\dis.py', 'PYMODULE'),
   ('opcode', 'C:\\Python\\lib\\opcode.py', 'PYMODULE'),
   ('ast', 'C:\\Python\\lib\\ast.py', 'PYMODULE'),
-  ('stringprep', 'C:\\Python\\lib\\stringprep.py', 'PYMODULE'),
-  ('_py_abc', 'C:\\Python\\lib\\_py_abc.py', 'PYMODULE'),
   ('tracemalloc', 'C:\\Python\\lib\\tracemalloc.py', 'PYMODULE'),
+  ('_py_abc', 'C:\\Python\\lib\\_py_abc.py', 'PYMODULE'),
+  ('stringprep', 'C:\\Python\\lib\\stringprep.py', 'PYMODULE'),
   ('os', 'C:\\Python\\lib\\os.py', 'PYMODULE'),
   ('subprocess', 'C:\\Python\\lib\\subprocess.py', 'PYMODULE'),
   ('signal', 'C:\\Python\\lib\\signal.py', 'PYMODULE')])
