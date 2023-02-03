@@ -1,6 +1,6 @@
 
 # Reposync  
-## Auto-sync GitHub repositories  
+## Auto-Update GitHub Repositories  
   
 --------------------------------------------------------------
 Version 1.0.8 - June 16, 2022
@@ -19,9 +19,9 @@ https://conversiondynamics.com
 
 ### LICENSE:
 
-This program is free to use, modify and include in your own programs, whether for personal or commercial use, provided that the above comments are included without modification.  
-
-## Purpose:
+This program is free to use, modify and include in your own programs, whether for personal or commercial use, provided that everything above and including this paragraph are included in every copy, even if you modify the accompanying code modules or the contents herein below.  
+  
+## What is Reposync?
 Reposync is a small utility written in Python (3.7.1) that automates git commits to online repos from a Windows platform. Although you can run Reposync directly as a stand-alone utility, it's even more powerful when called directly from the Windows task scheduler utility (Schedule Tasks). You can specify reposync.exe as the program to run within a given scheduled task. 
 
 The Python script is compiled to an executable using pyinstaller (explained below). 
