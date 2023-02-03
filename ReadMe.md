@@ -3,7 +3,7 @@
 ## Auto-Update GitHub Repositories  
   
 --------------------------------------------------------------
-Version 1.0.8 - June 16, 2022
+Version 1.0.8 - Released June 16, 2022
 
 Author: Cameron Landers
 
@@ -17,9 +17,15 @@ __Cameron's Web Site:__
 
 https://conversiondynamics.com
 
-### LICENSE:
+--------------------------------------------------------------
+## LICENSE:
 
-This program is free to use, modify and include in your own programs, whether for personal or commercial use, provided that everything above and including this paragraph are included in every copy, even if you modify the accompanying code modules or the contents herein below.  
+--------------------------------------------------------------
+All files within this distribution, hereinafter referenced as "the program" are free to use, modify and include in your own programs, whether for personal or commercial use. The only restrictions are as follows: 
+- Everything above and including this license section must be included in every copy you distribute that contains the program in whole or in part, even if you modify the accompanying code modules or the contents below. 
+- Any such modification must be accompanied by a statement indicating it has been modified from this original version. 
+
+--------------------------------------------------------------
   
 ## What is Reposync?
 Reposync is a small utility written in Python (3.7.1) that automates git commits to online repos from a Windows platform. Although you can run Reposync directly as a stand-alone utility, it's even more powerful when called directly from the Windows task scheduler utility (Schedule Tasks). You can specify reposync.exe as the program to run within a given scheduled task. 
@@ -28,18 +34,34 @@ The Python script is compiled to an executable using pyinstaller (explained belo
 The executable is then used in scheduled tasks to do periodic commits on any schedule you choose. 
 
 Let's say you have several web sites or otehr applications, and you keep them all backed up periodically in GitHub repositories. You can setup scheduled tasks to update the repos nightly. This gives you fully-automated automated daily backups of all your repos, so your latest code changes are always in sync. 
- 
-## Calling Reposync From Windows Task Scheduler  
-  
-Use these steps to configure your scheduled tasks (in Windows) to call Resposync. 
 
-From the Schedule Tasks utility:
+## Files Included 
+- `reposync.exe ` - The compiled Windows executable 
+- `log.exe` - The logging module (called by reposync.exe to implement the logging feature)
+- `reposync.py` - The main program source code, written in Python
+- `log.py` - the loggin module source code, written in Python
+- `Readme.md` - This file
+ 
+## How To Use Reposync
+Reposync is a command-line utility. You can run it manually and specify the required parameters, or you can build a command line into a Windows Scheduled Task to update a given Github repository in a scheduled, automated fashion. Reposync was created for the purpose of doing the later.
+
+The command line consists of the program name (reposync.exe) followed by two paramweters:
+- The full path to the target (local) Github repository root folder on disk. (the where the hidden folder `.git` is located).
+- The name of the target branch on GitHub where you want to commit your changes. (by default, this is a branch named "main").
+
+## Calling Reposync From A Windows Scheduled Task  
+  
+The real power of Reposync is when you call it from Scheduled Tasks for a fully automated solution. Use these steps to configure your scheduled tasks (in Windows) to call Resposync. 
+
+>This documentation assumes some familiarity with creating Scheduled Tasks. If you've never created a Scheduled Task before, consult the Microsoft documentation first, before completing the steps below.
+
+Open the Schedule Tasks utility, then follow these steps to create and configure a Scheduled Task to call Reposync:
 - Choose _Start A Program_ and specify the full path and filename to reposync.exe as the program to be started. 
 - Specify the path to your local copy of the target GitHub repository as a command line argument: this is the full path to the local repo root directory (where .git resides) where you initially cloned the repo. This path should be specified in the _Arguments_ field in the scheduled task __actions__ configuration.  
 
 >Tip: Enclose the local repo path in double quotes "like this", regardless whether or not there are spaces in the path. This is necessary in order to successfully pass it as a command line argument to the Reposync executable.  
  
-You can specify whatever schedule you want-- daily, weekly, hourly, etc. based upon how often you make changes to your repo contents. 
+Specify whatever schedule you want-- daily, weekly, hourly, etc. based upon how often you make changes to your repo contents. 
 
 ### What It Does:
 

@@ -2,7 +2,7 @@ import subprocess
 import os
 import sys
 # --------------------------------------------------------------
-# reposync.py - version 1.0.12 - June 16, 2022
+# reposync.py - version 1.0.8 - June 16, 2022
 # --------------------------------------------------------------
 # Developed using Python 3.7.1
 # --------------------------------------------------------------
@@ -16,10 +16,16 @@ import sys
 # --------------------------------------------------------------
 # LICENSE: 
 # --------------------------------------------------------------
-# This program is free to use, modify and include in your own 
-# programs, whether for personal or commercial use, provided 
-# that the above comments are included without modification.  
-# --------------------------------------------------------------
+# All files within this distribution, hereinafter referenced as 
+# "the program" are free to use, modify and include in your own 
+# programs, whether for personal or commercial use. The only 
+# restrictions are as follows: 
+# - Everything above and including this license section must be 
+# included in every copy you distribute that contains the 
+# program in whole or in part, even if you modify the 
+# accompanying code. 
+# - Any such modification must be accompanied by a statement 
+# indicating it has been modified from this original version. 
 # --------------------------------------------------------------
 def cleanMessage(msg):
 	# ----------------------------------------------------------
