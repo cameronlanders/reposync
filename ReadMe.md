@@ -3,7 +3,7 @@
 ## Auto-sync GitHub repositories  
   
 --------------------------------------------------------------
-Version 1.0.8 - December 2022
+Version 1.0.8 - June 16, 2022
 
 Author: Cameron Landers
 
@@ -17,7 +17,7 @@ __Cameron's Web Site:__
 
 https://conversiondynamics.com
 
-__LICENSE:__
+### LICENSE:
 
 This program is free to use, modify and include in your own programs, whether for personal or commercial use, provided that the above comments are included without modification.  
 
