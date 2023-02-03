@@ -1,71 +1,83 @@
 
 # Reposync  
-## Auto-sync github repositories  
+## Auto-sync GitHub repositories  
   
-Reposync is a python program that synchronizes a local github repository to it's origin on Github.  
+--------------------------------------------------------------
+Version 1.0.8 - December 2022
 
-* Reposync is intended to be called from scheduled tasks to do autmated commits and pushes to keep any repository in sync with it's online origin.
-* Both the `reposync.py` and `log.py` scripts are compiled to executables for use in the scheduled tasks. 
-* The program includes full logging of the output returned from each git command. The logging feature is implemented in the included log.py script.
-* This program only runs on Windows. A Unix/Linux port is TBD at the time of this writing.
+Author: Cameron Landers
+
+Developed using Python 3.7.1
+
+__Cameron's LinkedIN profile:__ 
+
+https://www.linkedin.com/in/cameronlandersexperience/
  
-### Important:   
-* It is critical that the location of **git.exe** is already included in your PATH environment variable so that git commands can be run from any directory on your machine. If not, you will need to add it. 
+__Cameron's Web Site:__
 
-### If you want to recompile the scripts:  
-If you need to make changes to the python script, you'll need to use pyinstaller to recompile the executable. From within the folder that contains the original reposync.py script, run the following commands to compile both the reposync.py script and the log.py script:  
+https://conversiondynamics.com
 
-    pyinstaller --onefile reposync.py
-    pyinstaller --onefile log.py
+__LICENSE:__
 
-* Obviously this assumes you have pyinstaller installed. If not, use `pip` to install it. 
+This program is free to use, modify and include in your own programs, whether for personal or commercial use, provided that the above comments are included without modification.  
 
-The commands shown above will compile the reposync script to an executable file (reposync.exe) and the log script to an executable file (log.exe). A folder called "_dist_" will be created, and the executable files will be placed there. 
+## Purpose:
+Reposync is a small utility written in Python (3.7.1) that automates git commits to online repos from a Windows platform. Although you can run Reposync directly as a stand-alone utility, it's even more powerful when called directly from the Windows task scheduler utility (Schedule Tasks). You can specify reposync.exe as the program to run within a given scheduled task. 
 
-> The scripts have already been compiled to executables in the dist folder within this repository. If you do not need to make any git command changes, the executables should be ready to use as they are.
+The Python script is compiled to an executable using pyinstaller (explained below). 
+The executable is then used in scheduled tasks to do periodic commits on any schedule you choose. 
+
+Let's say you have several web sites or otehr applications, and you keep them all backed up periodically in GitHub repositories. You can setup scheduled tasks to update the repos nightly. This gives you fully-automated automated daily backups of all your repos, so your latest code changes are always in sync. 
  
-## Deploying and Operating Reposync:  
-
-At a high level, once you have cloned the repo to your local machine, the following two steps are all you need to do in order to deploy Reposync in your environment. Details for creating the scheduled tasks are explained below.  
-
-1. Copy the executable files to a permanent location which you will specify as the path to reposync.exe in each scheduled task.
-2. Create a scheduled task for each repository you wish to automate, using the steps described below.  
-
-### Creating Your Scheduled tasks  
+## Calling Reposync From Windows Task Scheduler  
   
-**Use these steps to configure a scheduled task for each repository you wish to automate:**  
+Use these steps to configure your scheduled tasks (in Windows) to call Resposync. 
 
-* Open a new scheduled task. 
-* Choose _Start A Program_ and specify the full path and filename to reposync.exe as the program to be started. 
-* Specify the path to the local repository from which you wish to push commits as a command line argument: this is the full drive and path to the local repo root directory (where .git resides) where you initially cloned the repo. Example: "D:\MyRepo" 
-    * The local repository path must be placed in the `Arguments` field in the scheduled task's `Actions` section.  
-    * The local repository path must be enclosed in quotes, regardless whether or not there are spaces in the path. This is necessary in order to successfully pass the path as a command line argument to the python executable.  
-* Specify the name of the target branch on GitHub to which you want to push commits. 
-    * The branch name must be placed in the `Arguments` field in the scheduled task's `Actions` section. It must be added _after_ the local repository path described above.  
-    * The branch name must be enclosed in quotes. All arguments to a scheduled tsask command must always be in quotes, regardless whether or not there are spaces in them, as explained earlier.  
+From the Schedule Tasks utility:
+- Choose _Start A Program_ and specify the full path and filename to reposync.exe as the program to be started. 
+- Specify the path to your local copy of the target GitHub repository as a command line argument: this is the full path to the local repo root directory (where .git resides) where you initially cloned the repo. This path should be specified in the _Arguments_ field in the scheduled task __actions__ configuration.  
+
+>Tip: Enclose the local repo path in double quotes "like this", regardless whether or not there are spaces in the path. This is necessary in order to successfully pass it as a command line argument to the Reposync executable.  
  
-* Specify whatever schedule you want: daily, weekly, hourly, etc. based upon how often you expect to make changes to the local repository.  
+You can specify whatever schedule you want-- daily, weekly, hourly, etc. based upon how often you make changes to your repo contents. 
 
-When the scheduled task fires, Reposync will change to the specified local repository directory. It will then execute the following git commands to generate new commit to the online github repo: 
+### What It Does:
+
+When the scheduled task fires (or when you run it manually), Reposync will change to the local repo directory that you specified in the parameter list, and then it will run the following git commands to commit any changes to the online copy of your repo: 
  
     git add . 
-    git checkout (branch name)
     git commit -m "Updated by Reposync." 
-    git push
+    git push origin main 
 
-Regardless whether or not the local branch had any changes, the results will be formatted and logged to a file, whose name contains the current date. The log files will be placed in the same directory where the Reposync executables reside. So each day Reposync will add a new log file in this location. It's up to you to remove old log files periodically. 
+Every time `reposync.exe` runs, the path argument in the parameters you passed is used to determine where your target repo resides on disk. The program will then sync your local repo with the online github repo branch (which you also specify in the parameter list). Again, by default this is the "_main_" branch. 
+ 
+### Important Notes: 
+>Reposync does **NOT** do a "git pull". It is assumed you have a local repo that was in sync at the time you setup the program and started scheduling commits. 
+> 
+>If you have multiple people updating your online repo branch, then you may need to add a command to the script to make it always do a "git pull" prior to the "git add ." command. Just use the other git commands in the script as a model to glean the correct syntax for the new line you want to add.  
+>  
+>Of course, any time you change the python script you need to recompile and redeploy the executable. Details on hiow to do that are privided below. 
+ 
+>By default, the script updates a branch called "_main_". If your git repo master branch is not called "main" (or if you want to sync to a different branch) then you will need to update the script to target your desired branch. As mentioned above, you will then need to recompile the script and redeploy the executable to implement your changes. 
 
-Because the names of the log files begin with the date, you can probably think of lots of ways to create a simple program or script that deletes the oldest ones on some periodic basis, just based on their filenames.  
+## To Recompile The Script  
+If you need to make changes to the `reposync.py` script, you'll need to use pyinstaller to recompile the executable. From within the folder that contains your modified version of the script, run the following command:  
+
+    pyinstaller --onefile reposync.py
+
+This command will compile the python script to an executable (.exe) file. A folder called "_dist_" will be created, and the executable file will be placed there. 
+ 
+If you plan to use Windows task scheduler to call your newly-compiled executable, you will need to copy the executable file to a permanent location where you want your scheduled tasks to find it.   
+
+## log.py - The Logging Module
+
+Along with Reposync, we have also included a logging module called log.py. This script is called from within Reposync to provide detailed log services. A new log is generated per day that shows what repo was called and what the GitHub commands returned. This is helpful to debug problems in your scheduled tasks configuration. 
+
+If there were any errors returned in a given call to Reposync, in the Windows Schedule Tasks utility, select the task you want to check. task Scheduler will show the results from the last run of the task under the `history` tab. In the `action` segment of that information, you should see "successully completed" as the result of the action that calls reposync.exe. If you see something different, that's your cue to go off and examine the reposync log. It means the script likely did not complete successfully. The reposync log will then help you determine what may have gone wrong. 
+
+Once you get your scheduled tasks all running without errors, (a return value of "completed successfully") you're good to go.
 
 ---
-Copyright ©2022 Cameron Landers  
-This open source work is released under the <a href='https://opensource.org/licenses/MIT'>MIT License</a>:  
+[eof]  
 
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
->THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
->
-
-[eof]    
+  

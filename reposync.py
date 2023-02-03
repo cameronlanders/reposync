@@ -1,7 +1,26 @@
 import subprocess
 import os
 import sys
-
+# --------------------------------------------------------------
+# reposync.py - version 1.0.12 - June 16, 2022
+# --------------------------------------------------------------
+# Developed using Python 3.7.1
+# --------------------------------------------------------------
+# Author: Cameron Landers
+# --------------------------------------------------------------
+# Cameron's LinkedIN profile: 
+# https://www.linkedin.com/in/cameronlandersexperience/
+# 
+# Cameron's Web Site:
+# https://conversiondynamics.com
+# --------------------------------------------------------------
+# LICENSE: 
+# --------------------------------------------------------------
+# This program is free to use, modify and include in your own 
+# programs, whether for personal or commercial use, provided 
+# that the above comments are included without modification.  
+# --------------------------------------------------------------
+# --------------------------------------------------------------
 def cleanMessage(msg):
 	# ----------------------------------------------------------
 	# Convert to UTF8
@@ -25,26 +44,6 @@ def cleanMessage(msg):
 
 	return strout
 
-# def convertTuple(tup):
-# 	# ----------------------------------------------------------
-# 	# Parse message from index 0 of tuple. 
-# 	# ----------------------------------------------------------
-# 	#strout = tup[0].decode('utf-8')
-# 	strout = tup[0].decode('utf-8')
-# 	# ----------------------------------------------------------
-# 	# Clean up known anomalies.
-# 	# ----------------------------------------------------------
-# 	npos = strout.find("Your branch is up to date")
-# 	if (npos > 0):
-# 		strout=strout[0:npos]
-
-# 	strout=strout.replace('\n',' ')
-# 	strout=strout.replace('\r','')
-# 	# strout=strout.replace("On branch main Your branch", "On branch main. Your branch")
-# 	# strout=strout.replace(".  nothing to commit", ". Nothing to commit")
-# 	# strout=strout.replace("working tree clean ", "working tree clean.")
-# 	return strout
-
 # --------------------------------------------------------------
 # Configure repo, target branch and executable paths 
 # --------------------------------------------------------------
@@ -67,7 +66,6 @@ subprocess.call([logpath, msg])
 # --------------------------------------------------------------
 # Only run if the specified repo path exists. 
 # --------------------------------------------------------------
-
 if (os.path.isdir(repopath)):
 	os.chdir(repodrive)
 	os.chdir(repopath)
