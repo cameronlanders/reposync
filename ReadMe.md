@@ -5,9 +5,9 @@
 --------------------------------------------------------------
 Version 1.0.8 - Released June 16, 2022
 
-Author: Cameron Landers
-
 Developed using Python 3.7.1
+
+Author: `Cameron Landers`
 
 __Cameron's LinkedIN profile:__ 
 
