@@ -7,7 +7,7 @@ Version 1.0.8 - Released June 16, 2022
 
 Developed using Python 3.7.1
 
-Author: `Cameron Landers`
+Author: **Cameron Landers**
 
 __Cameron's LinkedIN profile:__ 
 
@@ -98,9 +98,9 @@ If you plan to use Windows task scheduler to call your newly-compiled executable
 
 ## log.py - The Logging Module
 
-Along with Reposync, we have also included a logging module called log.py. This script is called from within Reposync to provide detailed log services. A new log is generated per day that shows what repo was called and what the GitHub commands returned. This is helpful to debug problems in your scheduled tasks configuration. 
-
-If there were any errors returned in a given call to Reposync, in the Windows Schedule Tasks utility, select the task you want to check. task Scheduler will show the results from the last run of the task under the `history` tab. In the `action` segment of that information, you should see "successully completed" as the result of the action that calls reposync.exe. If you see something different, that's your cue to go off and examine the reposync log. It means the script likely did not complete successfully. The reposync log will then help you determine what may have gone wrong. 
+Along with Reposync, I have also included a logging module called **log.exe**. This module is called from within reposync.exe to provide detailed log services. A new log is generated per day that shows whn each repo was updated and what the GitHub commands returned. If changes were committed, the log will include them, the same as you would see if you ran the git commands yourself. The log is particularly helpful when debugging problems in your scheduled tasks configuration. 
+ 
+If there were any errors returned in a given call to Reposync, in the Windows Schedule Tasks utility, select the task you want to check. Task Scheduler will show the results from the last run of the task under the `history` tab. In the `action` segment of that information, you should see "successully completed" as the result of the action that calls reposync.exe. If you see something different, that's your cue to go off and examine the reposync log. It means the script likely did not complete successfully. The reposync log will then help you determine what may have gone wrong. 
 
 Once you get your scheduled tasks all running without errors, (a return value of "completed successfully") you're good to go.
 
