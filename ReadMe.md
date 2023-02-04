@@ -50,7 +50,7 @@ The command line consists of the program name (reposync.exe) followed by two par
 - The name of the target branch on GitHub where you want to commit your changes.
 
 ## Example:
-## `reposync.exe "c:\myapp" "main"`
+`reposync.exe "c:\myapp" "main"`
 
 Make sure to include the quotes around each parameter as shown. The above command would execute reposync.exe and pass in `c:\myapp` as the path to the target repository folder, and `main` would be used as the name of the target branch for the commit in the online GitHub repository. 
 
