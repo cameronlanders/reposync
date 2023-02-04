@@ -30,12 +30,12 @@ All files within this distribution, hereinafter referenced as "the program" are 
 ## What is Reposync?
 Reposync is a small utility written in Python (3.7.1) that automates git commits to online repos from a Windows platform. Although you can run Reposync directly as a stand-alone utility, it's even more powerful when called directly from the Windows task scheduler utility (Schedule Tasks). You can specify reposync.exe as the program to run within a given scheduled task. 
 
-The Python script is compiled to an executable using pyinstaller (explained below). 
-The executable is then used in scheduled tasks to do periodic commits on any schedule you choose. 
+The Python script is compiled to an executable using pyinstaller (explained below). Note that the source script (reposync.py) is NOT intended to be run directly. The program is intended to be run from the compiled executable only. If you want to modify the reposync.py script, you will need to recompile it. More on that below.
+The executable program is designed to be called from scheduled tasks to do periodic GitHub commits for any repository on any schedule you choose. 
 
-Let's say you have developed several applications or web sites and you are using GitHub repositories for source control. You can setup scheduled tasks to update the repos nightly. This gives you fully-automated daily backups of all your repos, so your latest code changes are always in sync. 
+Let's say you have developed several applications or web sites and you are using GitHub repositories for source control. You can setup scheduled tasks for each repository and call reposync from these tasks to automatically update the repos nightly. You get fully-automated daily backups of all your repos, so your latest code changes always stay in sync - you don't even have to think about it! 
 
-## Files Included 
+## Files in the distribution 
 - `reposync.exe ` - The compiled Windows executable 
 - `log.exe` - The logging module (called by reposync.exe to implement the logging feature)
 - `reposync.py` - The main program source code, written in Python
@@ -43,16 +43,16 @@ Let's say you have developed several applications or web sites and you are using
 - `Readme.md` - This file
  
 ## How To Use Reposync
-Reposync is a command-line utility. You can run it manually and specify the required parameters, or you can build a command line into a Windows Scheduled Task to update a given Github repository in a scheduled, automated fashion. Reposync was created for the purpose of doing the later.
+Reposync (reposync.exe) is a Windows command-line utility. You can run it manually and specify the required parameters, or you can build a command line into a Windows Scheduled Task to update a given Github repository in a scheduled, automated fashion as mentioned above. Reposync was created for the purpose of automation.
 
 The command line consists of the program name (reposync.exe) followed by two paramweters:
-- The full path to the target (local) Github repository root folder on disk. (the where the hidden folder `.git` is located).
+- The full local path to the target Github repository (the root folder where `.git` resides).
 - The name of the target branch on GitHub where you want to commit your changes.
 
 ## Example:
-`reposync.exe "c:\test" "main"`
+## `reposync.exe "c:\myapp" "main"`
 
-The above command would execute reposync.exe and pass in `c:\test` as the path to the target repository folder, and `main` would be used as the name of the target branch for the commit in the online GitHub repository. 
+Make sure to include the quotes around each parameter as shown. The above command would execute reposync.exe and pass in `c:\myapp` as the path to the target repository folder, and `main` would be used as the name of the target branch for the commit in the online GitHub repository. 
 
 ## Calling Reposync From A Windows Scheduled Task  
   
