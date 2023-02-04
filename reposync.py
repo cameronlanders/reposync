@@ -53,6 +53,12 @@ def cleanMessage(msg):
 # --------------------------------------------------------------
 # Configure repo, target branch and executable paths 
 # --------------------------------------------------------------
+repopath = ""
+repodrive = ""
+mylength = len(sys.argv)
+if (mylength < 3):
+	sys.exit("Correct Usage: repopath.exe [path to repository] [branch]\n\n Example: reposync.exe \"c:\\test\" \"main\" \n\n")
+
 repopath = sys.argv[1]
 repodrive = repopath[0:2]
 branch = sys.argv[2]

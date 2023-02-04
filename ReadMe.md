@@ -47,7 +47,12 @@ Reposync is a command-line utility. You can run it manually and specify the requ
 
 The command line consists of the program name (reposync.exe) followed by two paramweters:
 - The full path to the target (local) Github repository root folder on disk. (the where the hidden folder `.git` is located).
-- The name of the target branch on GitHub where you want to commit your changes. (by default, this is a branch named "main").
+- The name of the target branch on GitHub where you want to commit your changes.
+
+## Example:
+`reposync.exe "c:\test" "main"`
+
+The above command would execute reposync.exe and pass in `c:\test` as the path to the target repository folder, and `main` would be used as the name of the target branch for the commit in the online GitHub repository. 
 
 ## Calling Reposync From A Windows Scheduled Task  
   
