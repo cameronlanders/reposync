@@ -54,6 +54,8 @@ The command line consists of the program name (reposync.exe) followed by two par
 
 Make sure to include the quotes around each parameter as shown. The above command would execute reposync.exe and pass in `c:\myapp` as the path to the target repository folder, and `main` would be used as the name of the target branch for the commit in the online GitHub repository. 
 
+>Tip: If you are running reposync.exe manually and can't remember the required parameters (or their order), you can just type "reposync.exe" with no parameters and press the ENTER key. Example usage will be shown.  
+
 ## Calling Reposync From A Windows Scheduled Task  
   
 The real power of Reposync is when you call it from Scheduled Tasks for a fully automated solution. Use these steps to configure your scheduled tasks (in Windows) to call Resosync. 
