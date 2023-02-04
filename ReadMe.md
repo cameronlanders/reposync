@@ -39,7 +39,7 @@ Let's say you have developed several applications or web sites and you are using
 - `reposync.exe ` - The compiled Windows executable 
 - `log.exe` - The logging module (called by reposync.exe to implement the logging feature)
 - `reposync.py` - The main program source code, written in Python
-- `log.py` - the loggin module source code, written in Python
+- `log.py` - the logging module source code, written in Python
 - `Readme.md` - This file
  
 ## How To Use Reposync
