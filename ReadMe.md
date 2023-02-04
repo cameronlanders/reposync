@@ -56,7 +56,7 @@ Make sure to include the quotes around each parameter as shown. The above comman
 
 ## Calling Reposync From A Windows Scheduled Task  
   
-The real power of Reposync is when you call it from Scheduled Tasks for a fully automated solution. Use these steps to configure your scheduled tasks (in Windows) to call Resposync. 
+The real power of Reposync is when you call it from Scheduled Tasks for a fully automated solution. Use these steps to configure your scheduled tasks (in Windows) to call Resosync. 
 
 >This documentation assumes some familiarity with creating Scheduled Tasks. If you've never created a Scheduled Task before, consult the Microsoft documentation first, before completing the steps below.
 
