@@ -76,7 +76,7 @@ When the scheduled task fires (or when you run it manually), Reposync will chang
     git commit -m "Updated by Reposync." 
     git push origin main 
 
-Every time `reposync.exe` runs, the path argument in the parameters you passed is used to determine where your target repo resides on disk. The program will then sync your local repo with the online github repo branch (which you also specify in the parameter list). Again, by default this is the "_main_" branch. 
+Every time `reposync.exe` runs, the path argument in the parameters you passed is used to determine where your target repo resides on disk. The program will then sync your local repo with the online github repo branch (which you also specify in the parameter list). In our example, this is the "_main_" branch. 
  
 ### Important Notes: 
 >Reposync does **NOT** do a "git pull". It is assumed you have a local repo that was in sync at the time you setup the program and started scheduling commits. 
