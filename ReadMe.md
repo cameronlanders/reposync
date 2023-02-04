@@ -33,7 +33,7 @@ Reposync is a small utility written in Python (3.7.1) that automates git commits
 The Python script is compiled to an executable using pyinstaller (explained below). 
 The executable is then used in scheduled tasks to do periodic commits on any schedule you choose. 
 
-Let's say you have several web sites or otehr applications, and you keep them all backed up periodically in GitHub repositories. You can setup scheduled tasks to update the repos nightly. This gives you fully-automated automated daily backups of all your repos, so your latest code changes are always in sync. 
+Let's say you have developed several applications or web sites and you are using GitHub repositories for source control. You can setup scheduled tasks to update the repos nightly. This gives you fully-automated daily backups of all your repos, so your latest code changes are always in sync. 
 
 ## Files Included 
 - `reposync.exe ` - The compiled Windows executable 
